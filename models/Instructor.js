@@ -1,0 +1,30 @@
+const mongoose=require('mongoose')
+const instructorSchema=new mongoose.Schema({
+    UserId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
+    description:{
+        type:String
+    },
+    Specialization:{
+        type:String
+    },
+    About:{
+        type:String
+    },
+    Rating:{
+        type:Number,
+        default:0
+    },
+    Type_of_employee:{
+        type:String
+    },
+    Qualifications:{
+        type:String
+    },
+    Method_of_teaching:{
+        type:String
+    }
+})
+module.exports=mongoose.model('Instructor',instructorSchema)

@@ -1,0 +1,11 @@
+const {instructorticket}=require('../controllers/ticketController')
+const {createNewCourse}=require('../controllers/courseController')
+const { createSection } = require('../controllers/sectionController')
+const { addnewlecture } = require('../controllers/lectureController')
+const express=require('express')
+const router=express.Router()
+const isInstructor=require('../middleware/isInstructor')
+router.post("/createCourse",isInstructor,createNewCourse)
+router.post("/createSection",isInstructor,createSection)
+router.post("/addlecture",isInstructor,addnewlecture)
+module.exports=router
