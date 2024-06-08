@@ -11,6 +11,9 @@ const options={
             {
                 url:'http://localhost:5000'
             },
+            {
+                url:'https://hi-study-backend.onrender.com'
+            }
         ],
     },
     apis:['./routes/*.js']
