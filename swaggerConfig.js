@@ -1,4 +1,8 @@
 const swaggerJsdoc=require('swagger-jsdoc');
+require('dotenv').config()
+const servers = process.env.NODE_ENV === 'production'
+  ? [{ url: process.env.PROD_URL }]
+  : [{ url: process.env.LOCAL_URL }];
 const options={
     definition:{
         openapi:'3.0.0',
@@ -7,14 +11,7 @@ const options={
             version:'1.0.0',
             description:'The current api includes instructor and user side apis'
         },
-        servers:[
-            {
-                url:'http://localhost:5000'
-            },
-            {
-                url:'https://hi-study-backend.onrender.com'
-            }
-        ],
+        servers:servers,
     },
     apis:['./routes/*.js']
 }
