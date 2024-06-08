@@ -2,9 +2,9 @@ const User=require('../models/User')
 const dotenv=require('dotenv')
 dotenv.config()
 const jwt=require('jsonwebtoken')
-const isInstructor=async(req,res,next)=>{
+const isLogin=async(req,res,next)=>{
     try{
-        const authHeader=req.headers.authorization;
+        const authHeader=req.headers.auth;
         if(!authHeader){
             return res.status(403).json({success:false,message:"Please login to continue"});
         }
@@ -27,4 +27,4 @@ const isInstructor=async(req,res,next)=>{
     }
     
 }
-module.exports=isInstructor
+module.exports=isLogin

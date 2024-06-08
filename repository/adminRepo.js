@@ -7,6 +7,7 @@ const getInstructorTickets = async () => {
 }
 const verifyTicket = async (id, operation) => {
     const ticket = await InstructorTickets.findById(id);
+    console.log(ticket)
     if (operation === 'rejected') {
         await InstructorTickets.findByIdAndUpdate(id, { status: operation });
         return { success: true, message: "Successfully updated the ticket", status_code: 200 }
@@ -15,7 +16,6 @@ const verifyTicket = async (id, operation) => {
     ticket.save();
     const { description, UserId, Specialization, About, Type_of_employee, Qualifications, Method_of_teaching, status } = ticket;
     const newInstructor = await Instructor.create({ UserId: UserId, Specialization: Specialization, About: About, Type_of_employee: Type_of_employee, Qualifications: Qualifications, Method_of_teaching: Method_of_teaching, description: description })
-
 
     //change the role in user table
     const user = await User.findById(UserId)

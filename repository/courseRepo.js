@@ -30,7 +30,6 @@ const findCourses = async (id) => {
         }).populate('Reviews');
         return { success: true, status_code: 200, data: allCourses };
     }
-
     const course = await Courses.findById(id).populate({
         path: 'Section_Id',
         populate: {

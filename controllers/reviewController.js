@@ -4,7 +4,7 @@ const addReviews=async(req,res,next)=>{
         const {courseId,description}=req.body;
         const response=await addReview(courseId,description);
         if(response.success)
-            return res.status(response.status_code).json({message:response.message,success:true});
+            return res.status(response.status_code).json({success:true,message:response.message,data:response.data});
     }
     catch(error){
         next(error)
@@ -15,7 +15,7 @@ const deleteReviews=async(req,res,next)=>{
         const {id}=req.params;
         const response=await deleteReview(id);
         if(response.success)
-            return res.status(response.status_code).json({      message:response.message,success:true})
+            return res.status(response.status_code).json({success:true,message:response.message})
     }
     catch(error){
         next(error)
@@ -28,7 +28,7 @@ const updateReviews=async(req,res,next)=>{
         const newdescription=description
         const response=await updateReview(id,newdescription);
         if(response.success)
-            return res.status(response.status_code).json({success:true,message:response.message})
+            return res.status(response.status_code).json({success:true,message:response.message,data:response.data})
     }
     catch(error){
         next(error)

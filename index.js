@@ -11,6 +11,11 @@ app.use(cors())
 const {connectMongoose}=require('./connectDB')
 connectMongoose();
 
+//swagger setup
+const swaggerUi=require('swagger-ui-express')
+const swaggerSpecs=require('./swaggerConfig')
+app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerSpecs))
+
 
 //api routes
 const authRoutes=require('./routes/authRoutes');

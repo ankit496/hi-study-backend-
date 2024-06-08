@@ -13,7 +13,7 @@ const create = async (data) => {
     const username = data.username;
 
     if (!email || !password || !username) {
-        throw new CustomError('Missing data', 400)
+        throw new CustomError('Invalid data', 400)
     }
     const userExist = await User.findOne({ $or: [{ "email": email }, { "username": username }] })
     if (userExist) {
@@ -32,7 +32,7 @@ const create = async (data) => {
     if (response.success) {
         return { success: true, userId };
     }
-    throw new CustomError('Invalid Email', 400)
+    throw new CustomError('Invalid Data', 400)
 }
 const verifyEmail = async (userId, otp) => {
     const record = await Otp.findOne({ userId });
@@ -44,16 +44,16 @@ const verifyEmail = async (userId, otp) => {
         const token = jwt.sign({ userId: newUser._id }, JWT_SECRET, { expiresIn: '7d' })
         return { success: true, token };
     }
-    throw new CustomError('Invalid OTP', 400)
+    throw new CustomError('Invalid Data', 400)
 }
 const userLogin = async (data) => {
     const user = await User.findOne({ username: data.username })
     if (!user) {
-        throw new CustomError('Invalid Credentials', 400);
+        throw new CustomError('Invalid Credentials', 401);
     }
     const isValid = await bcrypt.compare(data.password, user.password);
     if (!isValid) {
-        throw new CustomError('Invalid Credentials', 400);
+        throw new CustomError('Invalid Credentials', 401);
     }
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '7d' })
     return { success: true, token };

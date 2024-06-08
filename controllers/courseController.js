@@ -20,7 +20,7 @@ const createNewCourse=async(req,res,next)=>{
 const getAllCourses=async(req,res,next)=>{
     try{
         const response=await findCourses();
-        return res.status(response.status_code).json({message:"Successfully fetched all Courses",data:response.data});
+        return res.status(response.status_code).json({success:true,message:"Successfully fetched all Courses",data:response.data});
     }
     catch(error){
         next(error)
@@ -30,7 +30,7 @@ const getCourse=async(req,res,next)=>{
     try{
         const {id}=req.params;
         const response=await findCourses(id);
-        return res.status(response.status_code).json({message:"Successfully fetched Course",data:response.data});
+        return res.status(response.status_code).json({success:true,message:"Successfully fetched Course",data:response.data});
     }
     catch(error){
         next(error)

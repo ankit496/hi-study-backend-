@@ -8,8 +8,7 @@ const addReview = async (courseId, description) => {
     const course = await Courses.findById(courseId);
     course.Reviews.push(review);
     await course.save();
-    return { success: true, message: "Successfully added review", status_code: 201 };
-
+    return { success: true, message: "Successfully added review", status_code: 201 ,data:review};
 }
 const deleteReview = async (id) => {
     const review = await Review.findById(id);
@@ -23,7 +22,7 @@ const deleteReview = async (id) => {
 }
 const updateReview = async (id, newdescription) => {
     const review = await Review.findByIdAndUpdate(id, { description: newdescription });
-    return { success: true, message: 'Successfully updated review', status_code: 200 }
+    return { success: true, message: 'Successfully updated review', status_code: 200 ,data:review}
 }
 module.exports = {
     addReview,

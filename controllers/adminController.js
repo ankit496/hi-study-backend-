@@ -10,7 +10,7 @@ const getInstructorRequests=async(req,res)=>{
         next(error)
     }
 }
-const verifyInstructorTicket=async(req,res)=>{
+const verifyInstructorTicket=async(req,res,next)=>{
     try{
         const {id}=req.params;
         const {operation}=req.body;

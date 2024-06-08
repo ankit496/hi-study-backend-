@@ -5,11 +5,11 @@ const createNewSection = async (title, courseId) => {
     const course = await Courses.findById(courseId);
     await course.Section_Id.push(newSection._id);
     course.save()
-    return { success: true, status_code: 201, message: "Successfully added section" }
+    return { success: true, status_code: 201, message: "Successfully added section",data:newSection }
 }
 const deleteSection = async (sectionId) => {
     await Section.findByIdAndDelete(sectionId);
-    return { success: true, status_code: 200, message: "Successfully deleted course" }
+    return { success: true, status_code: 200, message: "Successfully deleted course"}
 }
 module.exports = {
     createNewSection,

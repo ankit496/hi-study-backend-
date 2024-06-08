@@ -4,7 +4,7 @@ dotenv.config()
 const jwt=require('jsonwebtoken')
 const isAdmin=async(req,res,next)=>{
     try{
-        const authHeader=req.headers.authorization;
+        const authHeader=req.headers.auth;
         if(!authHeader){
             return res.status(403).json({success:false,message:"Please login to continue"});
         }
@@ -16,11 +16,11 @@ const isAdmin=async(req,res,next)=>{
         }
         const user=await User.findById(id)
         if(!user)
-            return res.status(403).json({succes:false,message:"You are not authorized to perform this action"})
+            return res.status(401).json({succes:false,message:"You are not authorized to perform this action"})
         // console.log('reached here')
         if(user.role==='admin')
             return next();
-        return res.status(403).json({success:false,message:"You are not authorized to perform this action"});
+        return res.status(401).json({success:false,message:"You are not authorized to perform this action"});
     }
     catch(error){
         return res.status(500).json({success:false,message:error.message})
