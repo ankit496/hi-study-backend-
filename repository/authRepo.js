@@ -58,8 +58,55 @@ const userLogin = async (data) => {
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '7d' })
     return { success: true, token };
 }
+const updateUserRepo = async (data) => {
+    const { id, first_name, last_name, phone_number, skill, bio, profile_pic ,cover_pic} = data
+    const user = await User.findById(id).select('-password');
+    if (phone_number)
+        user.phone_number = phone_number;
+    if (first_name)
+        user.first_name = first_name;
+    if (last_name)
+        user.last_name = last_name;
+    if (skill)
+        user.skill = skill;
+    if (bio)
+        user.bio = bio;
+    if (profile_pic)
+        user.Profile_Pic = profile_pic
+    if(cover_pic)
+        user.Cover_Pic=cover_pic
+    if(linkedin)
+        user.LinkedIn=linkedin
+    if(facebook)
+        user.Facebook=facebook
+    if(twitter)
+        user.Twitter=twitter
+    if(github)
+        user.Github=github
+    if(website)
+        user.Website=website
+    user.save();
+    return { success: true, user };
+}
+const userDetailsRepo = async (id) => {
+    const user = await User.findById(id)
+      .select('-password')
+      .populate({
+        path: 'courses_bought',
+        populate: {
+          path: 'instructor',
+          populate: {
+            path: 'UserId',
+            model: 'User' // Ensure this matches the model name for User
+          }
+        }
+      }); // Add the field to be populated
+    return { success: true, user };
+}
 module.exports = {
     create,
     userLogin,
-    verifyEmail
+    userDetailsRepo,
+    verifyEmail,
+    updateUserRepo
 }

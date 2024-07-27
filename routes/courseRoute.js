@@ -1,6 +1,6 @@
 const express=require('express')
 const router=express.Router()
-const {getCourse,getAllCourses}=require('../controllers/courseController')
+const {getCourse,getAllCourses, getCourseContent}=require('../controllers/courseController')
 /**
  * @swagger
  * components:
@@ -70,4 +70,6 @@ router.get('/',getAllCourses)
  *          description: Internal Server Error
  */
 router.get("/:id",getCourse)
+
+router.get("/getLesson/:id",getCourseContent)
 module.exports=router

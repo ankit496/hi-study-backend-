@@ -1,6 +1,6 @@
 const express=require('express')
 const router=express.Router()
-const {signup,login, verifyemail}=require('../controllers/authController')
+const {signup,login, verifyemail,userDetails, udpateUser}=require('../controllers/authController')
 
 
 /**
@@ -98,4 +98,8 @@ router.post('/login',login)
  *         description: Internal Server Error
  */
 router.post('/verify',verifyemail)
+
+router.get('/getUserDetails/:id',userDetails)
+
+router.put('/updateUser',udpateUser)
 module.exports=router

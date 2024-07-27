@@ -14,9 +14,9 @@ const instructorticket=async (req,res,next)=>{
         if(!userId){
             throw new CustomError('Please Login to continue',403);
         }
-        const {description,specialization,about,type_of_employee,qualifications,method_of_teaching}=req.body
+        const {description,specialization,about,type_of_employee,qualifications,method_of_teaching,linkedin,twitter,facebook,instagram}=req.body
         const id=new mongoose.Types.ObjectId(userId)
-        const response=await instructorTicketRequest(description,specialization,about,type_of_employee,qualifications,method_of_teaching,id);
+        const response=await instructorTicketRequest(description,specialization,about,type_of_employee,qualifications,method_of_teaching,id,linkedin,twitter,facebook,instagram);
         return res.status(response.status_code).json(response);
     }
     catch(error){

@@ -11,6 +11,10 @@ const lectureSchema=new mongoose.Schema({
     Content_url:{
         type:String,
         required:true
+    },
+    Quizzes:{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref:'Quiz'
     }
 })
 module.exports=mongoose.model('Lectures',lectureSchema);

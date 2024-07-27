@@ -21,6 +21,7 @@ const sendEmail=async(recipientEmail,otp)=>{
         return {success:true,info}
     }
     catch(error){
+        console.log(error)
         throw error
     }
 }

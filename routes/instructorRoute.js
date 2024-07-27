@@ -1,10 +1,11 @@
 const {instructorticket}=require('../controllers/ticketController')
-const {createNewCourse}=require('../controllers/courseController')
+const {createNewCourse,addcourseOverview, addQuiz}=require('../controllers/courseController')
 const { createSection } = require('../controllers/sectionController')
 const { addnewlecture } = require('../controllers/lectureController')
 const express=require('express')
 const router=express.Router()
 const isInstructor=require('../middleware/isInstructor')
+const { getInstructor } = require('../controllers/instructorController')
 
 /**
  * @swagger
@@ -184,4 +185,7 @@ router.post("/createSection",isInstructor,createSection)
  *         description: Internal Server Error
  */
 router.post("/addlecture",isInstructor,addnewlecture)
+router.get("/getInstructorById/:id",getInstructor)
+router.post("/addCourseOverview",isInstructor,addcourseOverview)
+router.post("/addQuiz",isInstructor,addQuiz)
 module.exports=router

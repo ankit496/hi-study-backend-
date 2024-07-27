@@ -53,7 +53,7 @@ const isLogin=require('../middleware/isLogin')
  *         description: Internal Server Error
  *    
  */
-router.post("/addReview",isLogin,addReviews)
+router.post("/addReview",addReviews)
 /**
  * @swagger
  * /api/review/deleteReview/{id}:

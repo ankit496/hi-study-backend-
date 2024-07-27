@@ -1,13 +1,19 @@
 const Review = require('../models/Review')
-const Courses = require('../models/Courses')
-const addReview = async (courseId, description) => {
+const Courses = require('../models/Courses');
+const User= require('../models/User');
+const addReview = async (courseId, description,userId,rating) => {
     const review = await Review.create({
         Course_Id: courseId,
-        description: description
+        UserId:userId,
+        description: description,
+        rating:rating
     })
     const course = await Courses.findById(courseId);
-    course.Reviews.push(review);
+    course.review.push(review);
+    const user=await User.findById(userId)
+    user.reviews.push(review._id)
     await course.save();
+    await user.save();
     return { success: true, message: "Successfully added review", status_code: 201 ,data:review};
 }
 const deleteReview = async (id) => {

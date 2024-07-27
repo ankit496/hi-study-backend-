@@ -1,11 +1,11 @@
 const {addReview,deleteReview,updateReview}=require('../repository/reviewRepo')
 const addReviews=async(req,res,next)=>{
     try{
-        const {courseId,description}=req.body;
-        const response=await addReview(courseId,description);
+        const {courseId,description,userId,rating}=req.body;
+        const response=await addReview(courseId,description,userId,rating);
         if(response.success)
             return res.status(response.status_code).json({success:true,message:response.message,data:response.data});
-    }
+        }
     catch(error){
         next(error)
     }

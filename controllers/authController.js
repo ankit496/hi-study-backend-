@@ -1,6 +1,6 @@
 // const {login}=require('../repository/authRepo')
 const { User, Otp } = require('../models/index')
-const { create, userLogin, verifyEmail } = require('../repository/authRepo')
+const { create, userLogin, verifyEmail ,userDetailsRepo,updateUserRepo} = require('../repository/authRepo')
 const signup = async (req, res, next) => {
     try {
         const response = await create({
@@ -38,8 +38,31 @@ const login = async (req, res, next) => {
         next(error)
     }
 }
+const userDetails=async(req,res,next)=>{
+    try{
+        const {id}=req.params
+        const response=await userDetailsRepo(id)
+        return res.status(200).json(response)
+    }
+    catch(error){
+        next(error)
+    }
+}
+const udpateUser=async(req,res,next)=>{
+    try{
+        const {id,first_name,last_name,phone_number,skill,bio,profile_pic,cover_pic}=req.body
+        const data={id,first_name,last_name,phone_number,skill,bio,profile_pic,cover_pic};
+        const response=await updateUserRepo(data);
+        return res.status(201).json(response)
+    }
+    catch(error){
+        next(error)
+    }
+}
 module.exports = {
     signup,
     login,
-    verifyemail
+    verifyemail,
+    userDetails,
+    udpateUser
 }

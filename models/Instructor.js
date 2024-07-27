@@ -17,7 +17,23 @@ const instructorSchema=new mongoose.Schema({
         type:Number,
         default:0
     },
+    CourseCreated:{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref:'Courses'
+    },
     Type_of_employee:{
+        type:String
+    },
+    LinkedIn:{
+        type:String
+    },
+    Facebook:{
+        type:String
+    },
+    Twitter:{
+        type:String
+    },
+    Instagram:{
         type:String
     },
     Qualifications:{

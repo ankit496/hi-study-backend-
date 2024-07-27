@@ -5,6 +5,7 @@ const jwt=require('jsonwebtoken')
 const isInstructor=async(req,res,next)=>{
     try{
         const authHeader=req.headers.auth;
+        // console.log(authHeader)
         if(!authHeader){
             return res.status(403).json({success:false,message:"Please login to continue"});
         }

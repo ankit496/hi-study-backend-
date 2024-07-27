@@ -1,5 +1,4 @@
-const {createNewSection}=require('../repository/sectionRepo')
-const {findCourseByTitle}=require('../repository/courseRepo')
+const {createNewSection, deleteSectionRepo}=require('../repository/sectionRepo')
 const createSection=async(req,res,next)=>{
     try{
         const {title,courseId}=req.body;
@@ -10,6 +9,19 @@ const createSection=async(req,res,next)=>{
         next(error)
     }
 }
+const deleteSection=async(req,res,next)=>{
+    try{
+        const {id}=req.params
+        const sectionId=id
+        console.log(req.params)
+        const response=await deleteSectionRepo(sectionId)
+        return res.status(200).json({success:true,message:response.message})
+    }
+    catch(error){
+        next(error)
+    }
+}
 module.exports={
-    createSection
+    createSection,
+    deleteSection
 }

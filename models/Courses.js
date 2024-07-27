@@ -1,48 +1,85 @@
-const mongoose=require('mongoose')
-const courseSchema=new mongoose.Schema({
-    Section_Id:{
-        type:[mongoose.Schema.Types.ObjectId],
-        ref:'Section'
+const mongoose = require('mongoose')
+
+const courseSchema = new mongoose.Schema({
+    courseTitle: {
+        type: String
     },
-    Title:{
+    category: {
+        type: [String]
+    },
+    courseType: {
+        type: String //admin side
+    },
+    desc: {
+        type: String
+    },
+    level:{
         type:String,
-        unique:true,
-        required:true
+        enum:['All Levels','Intermediate','Beginner','Advance','Expert']
     },
-    Description:{
-        type:String,
-        required:true
+    courseThumbnail:{
+        type:String
     },
-    Rating:{
-        type:[Number],
-        minimum:0,
-        maximum:5,
-        default:0
-    },
-    Reviews:{
-        type:[mongoose.Schema.Types.ObjectId],
+    review: {
+        type: [mongoose.Schema.Types.ObjectId],
         ref:'Review'
     },
-    Category_Id:{
+    price: {
+        type: Number
+    },
+    offPrice: {
+        type: Number
+    },
+    sellsType: {
+        type: String //admin
+    },
+    courseImg: {
+         type: String 
+    },
+    courseListImg: {
+        type: String 
+    },
+    awardImg: {
+         type: String 
+    },
+    days: {
+         type: String
+    },
+    isActiveCate: {
+         type: Boolean 
+    },
+    language: {
+        type: [String]
+    },
+    courseAward: {
+        type: String
+    },
+    courseFor:{
+        type: [String]
+    },
+    courseOverview:{
+        type:[String]
+    },
+    RequirementDetails:{
+        type:[String]
+    },
+    OverviewDetails:{
+        type:[String]
+    },
+    courseIntro:{
+        type:String
+    },
+    enrolledUser:{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref:'User'
+    },
+    instructor:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Categories'
+        ref:'Instructor'
     },
-    Price:{
-        type:String,
-        required:true
-    },
-    Language:{
-        type:[String],
-        required:true
-    },
-    Level:{
-        type:String,
-        enum:['beginner','intermediate','advanced'],
-        required:true
-    },
-    Category:{
-        type:[String],
-        required:true
+    courseContent:{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref:'Section'
     }
 })
-module.exports=mongoose.model('Courses',courseSchema)
+module.exports = mongoose.model('Courses', courseSchema)
